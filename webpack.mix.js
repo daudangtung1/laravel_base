@@ -15,3 +15,10 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+//GENERAL
+mix.copy('resources/lib/jquery/jquery-3.2.1.min.js', 'public/lib/js/');
+//END GENERAL
+
+//AUTHOR
+
+//END AUTHOR
