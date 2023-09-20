@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\DemoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +15,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('user', UserController::class);
-Route::get('demo', [DemoController::class, 'index']);
