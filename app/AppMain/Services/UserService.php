@@ -3,18 +3,15 @@
 namespace App\AppMain\Services;
 
 use App\AppMain\Repositories\UserRepository;
-use App\AppMain\Repositories\UserDetailRepository;
 use App\AppMain\Config\AppConst;
-use App\Observers\UserObserver;
 
 class UserService
 {
-    protected $userRepository, $userDetailRepository;
+    protected $userRepository;
 
-    public function __construct(UserRepository $userRepository, UserDetailRepository $userDetailRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->userDetailRepository = $userDetailRepository;
     }
 
     public function index($input)
@@ -35,19 +32,8 @@ class UserService
             'password' => bcrypt($input['password']),
         ];
         $user = $this->userRepository->create($user);
-        if ($user);
-        $user_detail = [
-            'user_name' => $input['user_name'],
-            'user_id' => $user->id,
-        ];
-        $user_detail = $this->userDetailRepository->create($user_detail);
 
-        if ($user && $user_detail) {
-            $model = $this->userRepository->getModel();
-            $model::observe(UserObserver::class , ':writeLog');
-            return true;
-        }
-        return false;
+        return $user;
     }
 
     public function show($id)
