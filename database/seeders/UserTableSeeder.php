@@ -9,7 +9,7 @@ class UserTableSeeder extends Seeder
 {
     public function run()
     {
-        for ($i = 0; $i <= 3; $i++) {
+        for ($i = 0; $i <= 10; $i++) {
             User::create([
                 'name' => 'name_' . $i,
                 'email' => 'name_' . $i . '@gmail.test',
