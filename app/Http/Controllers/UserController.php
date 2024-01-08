@@ -3,28 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Service\UserService;
+use Exception;
 
 class UserController extends Controller
 {
-    protected $gender;
-    public function __construct(User $gender_list)
+    protected $userService;
+
+    public function __construct(UserService $userService)
     {
-        $this->gender_list = $gender_list;
+        $this->userService = $userService;
     }
+
     public function index()
     {
-        $users = User::all();
-        $gender_list = $this->gender_list->gender_1;
-
-        $arr = [];
-        foreach ($users as $key => $user) {
-            $arr[$key] = [
-                'name' => $user->name,
-                'gender' => $gender_list[$user->gender],
-            ];
-        };
-        dd($arr);
+        try {
+            $users = $this->userService->getList();
+            return view('user.index', compact('users'));
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 
     public function create()
