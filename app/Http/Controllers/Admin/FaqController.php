@@ -20,15 +20,9 @@ class FaqController extends Controller
     {
         try {
             $faqs = $this->faqService->getList();
-            return response()->json([
-                'code' => 200,
-                'data' => $faqs,
-            ]);
+            return $this->responseSuccess($faqs, 'Success');
         } catch (Exception $e) {
-            return response()->json([
-                'code' => 500,
-                'message' => $e->getMessage(),
-            ]);
+            return $this->responseFail('Fail');
         }
     }
 
