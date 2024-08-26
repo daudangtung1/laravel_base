@@ -1,0 +1,13 @@
+{
+    "name": "Art",
+    "alias": "art",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Art\\Providers\\ArtServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
