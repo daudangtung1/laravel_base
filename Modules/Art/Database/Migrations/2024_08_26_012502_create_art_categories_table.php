@@ -12,6 +12,7 @@ class CreateArtCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('image')->nullable();
             $table->unsignedInteger('author_id');
             $table->tinyInteger('status')->comment('1 is public, 0 is private');
             $table->timestamps();

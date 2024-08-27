@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Carbon;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('formatTime')) {
     function formatTime()
@@ -13,21 +13,42 @@ if (!function_exists('formatTime')) {
 if (!function_exists('uploadImage')) {
     function uploadImage($file, $authorId)
     {
-        $pathName = 'public/art/' . $authorId;
-        $path = $file->store($pathName);
+        $pathName = 'storage/art/' . $authorId;
+        $path = $file->storeAs($pathName, $file->getClientOriginalName(), 'public');
         return $path;
     }
 }
 
-if (!function_exists('getImageSize')) {
-    function getImageSize($path)
+if (!function_exists('getUploadImageSize')) {
+    function getUploadImageSize($path)
     {
-        $image = Image::make(storage_path('app/' . $path));
-        $width = $image->width();
-        $height = $image->height();
+        $size = getimagesize($path);
+        if (blank($size)) {
+            return [];
+        }
         return [
-            'width' => $width,
-            'height' => $height,
+            'width' => $size[0],
+            'height' => $size[1],
         ];
+    }
+}
+if (!function_exists('formatBytes')) {
+    function formatBytes($bytes, $precision = 2)
+    {
+        $units = ['B', 'KB', 'MB', 'GB', 'TB'];
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+        $bytes /= pow(1024, $pow);
+
+        return round($bytes, $precision) . ' ' . $units[$pow];
+    }
+}
+
+if (!function_exists('getImageUrl')) {
+    function getImageUrl($path)
+    {
+        return asset($path);
     }
 }

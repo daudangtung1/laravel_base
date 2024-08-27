@@ -2,17 +2,19 @@
 
 namespace Modules\Art\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Art\Entities\Art;
-use Intervention\Image\Image;
 
 class ArtController extends Controller
 {
     public function index()
     {
-        dd(1);
+        $data = Art::all();
+        foreach ($data as $v) {
+            $v->path = getImageUrl($v->path);
+        }
+        return view('art::art.index', compact('data'));
     }
 
     public function store(Request $request)
@@ -26,11 +28,23 @@ class ArtController extends Controller
         ]);
 
         $path = uploadImage($input['file'], $input['art_category_id']);
-        $pathFile = storage_path('app\\' . $path);
+        $pathFile = public_path($path);
+        $dimension = getUploadImageSize($pathFile);
+        $size = formatBytes(filesize($pathFile));
+
+        if (!blank($dimension)) {
+            $property = $dimension['width'] . 'x' . $dimension['height'] . 'x' . $size;
+        } else {
+            $property = $size;
+        }
+        unset($input['file']);
+        $input['size'] = $property;
+        $input['path'] = $path;
+        $create = Art::create($input);
 
         return response()->json([
             'status' => true,
-            'data' =>null,
+            'data' => $create,
         ]);
     }
 
