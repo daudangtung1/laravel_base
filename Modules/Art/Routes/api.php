@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Modules\Art\Http\Controllers\ArtCategoryController;
 use Modules\Art\Http\Controllers\ArtController;
+use Modules\Art\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,4 @@ use Modules\Art\Http\Controllers\ArtController;
 
 Route::resource('art', ArtController::class);
 Route::resource('art-category', ArtCategoryController::class);
+Route::resource('art-tag', TagController::class);
