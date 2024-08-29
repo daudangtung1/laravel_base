@@ -1,0 +1,7 @@
+@use "sass:math";
+$red: blue;
+
+.error {
+    color: $red;
+    width: 600px - 2px;
+}
