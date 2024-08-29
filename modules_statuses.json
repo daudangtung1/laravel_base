@@ -1,4 +1,6 @@
 {
     "Member": true,
-    "Art": true
+    "Art": true,
+    "Author": true,
+    "Admin": true
 }
