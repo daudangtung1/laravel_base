@@ -11,9 +11,22 @@ abstract class BaseRepository implements RepositoryInterface
     const LIMIT = 10;
 
     private $allowed_operator = [
-        '>', '>=', '=', '!=', '<>', '<', '<=',
-        'like', 'not like', 'in', 'not in', 'is null',
-        'has', 'doenst have', 'between', 'not between'
+        '>',
+        '>=',
+        '=',
+        '!=',
+        '<>',
+        '<',
+        '<=',
+        'like',
+        'not like',
+        'in',
+        'not in',
+        'is null',
+        'has',
+        'doenst have',
+        'between',
+        'not between'
     ];
 
     private $allowed_order = ["asc", "desc"];
@@ -44,6 +57,11 @@ abstract class BaseRepository implements RepositoryInterface
     public function find($id)
     {
         return $this->getQueryBuilder()->find($id);
+    }
+
+    public function findByField($field, $value, array $column = ['*'])
+    {
+        return $this->getQueryBuilder()->where($field, $value)->first($column);
     }
 
     public function show($id)

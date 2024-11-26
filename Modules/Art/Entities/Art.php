@@ -13,5 +13,6 @@ class Art extends Model
         'size',
         'status',
         'path',
+        'published_time',
     ];
 }

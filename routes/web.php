@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('app');
 // })->where('any', '.*');
 
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/send-noti', [HomeController::class, 'sendNoti']);
 Route::get('register-mail', [AuthController::class, 'register']);
+Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
+    Route::get('/', [ContactController::class, 'index'])->name('index');
+    Route::post('/', [ContactController::class, 'store'])->name('store');
+});
+
