@@ -11,6 +11,14 @@
 |
 */
 
-Route::prefix('author')->group(function() {
+use Illuminate\Support\Facades\Route;
+use Modules\Author\Http\Controllers\AuthorController;
+
+Route::prefix('author')->as('author.')->group(function () {
     Route::get('/', 'AuthorController@index');
+    Route::get('/login', [AuthorController::class, 'getLogin'])->name('getLogin');
+    Route::post('/login', [AuthorController::class, 'postLogin'])->name('postLogin');
+    Route::post('/logout', [AuthorController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [AuthorController::class, 'dashboard'])->name('dashboard');
 });

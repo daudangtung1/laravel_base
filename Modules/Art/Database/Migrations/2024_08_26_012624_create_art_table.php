@@ -16,6 +16,7 @@ class CreateArtTable extends Migration
             $table->string('path');
             $table->string('size')->nullable();
             $table->tinyInteger('status')->comment('1 public, 0 is private')->default(1);
+            $table->dateTime('published_time')->nullable();
             $table->timestamps();
         });
     }

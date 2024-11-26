@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Art-app:404</title>
+    <title>Not Found</title>
     <link rel="stylesheet" href="{{ mix('/css/errors.css') }}">
 </head>
 

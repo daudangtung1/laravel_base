@@ -22,4 +22,14 @@ class UserService
     {
         return $this->userRepository->find($id);
     }
+
+    public function findByField($field, $value)
+    {
+        return $this->userRepository->findByField($field, $value);
+    }
+
+    public function store($input)
+    {
+        return $this->userRepository->store($input);
+    }
 }

@@ -9,6 +9,7 @@ class AuthorType extends Model
     protected $table = 'author_types';
 
     protected $fillable = [
+        'id',
         'name',
         'color',
     ];

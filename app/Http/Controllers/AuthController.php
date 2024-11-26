@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Events\RegisterSendMail;
+use Modules\Author\Entities\Author;
 
 class AuthController extends Controller
 {
