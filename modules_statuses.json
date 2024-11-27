@@ -2,5 +2,7 @@
     "Member": true,
     "Art": true,
     "Author": true,
-    "Admin": true
+    "Admin": true,
+    "Seeder": true,
+    "AdminTableSeeder": true
 }

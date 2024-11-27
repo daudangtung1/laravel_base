@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Admin\Database\Seeders;
+namespace Modules\AdminTableSeeder\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminDatabaseSeeder extends Seeder
+class AdminTableSeederDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class AdminDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(AdminTableSeeder::class);
+        // $this->call("OthersTableSeeder");
     }
 }

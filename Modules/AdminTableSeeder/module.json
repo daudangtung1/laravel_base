@@ -1,0 +1,13 @@
+{
+    "name": "AdminTableSeeder",
+    "alias": "admintableseeder",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\AdminTableSeeder\\Providers\\AdminTableSeederServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
