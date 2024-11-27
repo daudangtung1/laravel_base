@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController as DemoRealTimeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/{any}', function () {
-//     return view('app');
-// })->where('any', '.*');
-
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/send-noti', [HomeController::class, 'sendNoti']);
-Route::get('register-mail', [AuthController::class, 'register']);
+Route::get('register-mail', [DemoRealTimeController::class, 'register']);
 Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
     Route::post('/', [ContactController::class, 'store'])->name('store');
 });
 
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/login', [AuthController::class, 'loginAdmin'])->name('getLogin');
+    Route::post('/login', [AuthController::class, 'postLoginAdmin'])->name('postLogin');
+    Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logout');
+});

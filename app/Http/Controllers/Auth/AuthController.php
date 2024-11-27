@@ -11,21 +11,25 @@ use Illuminate\Http\Request;
 use App\Utils\Constant;
 use Exception;
 use Modules\Author\Entities\Author;
+use Modules\Admin\Services\AdminService;
 
 class AuthController extends Controller
 {
     protected $authService;
     protected $userService;
     protected $authorService;
+    protected $adminService;
 
     public function __construct(
         AuthService $authService,
         UserService $userService,
-        AuthorService $authorService
+        AuthorService $authorService,
+        AdminService $adminService
     ) {
         $this->authService = $authService;
         $this->userService = $userService;
         $this->authorService = $authorService;
+        $this->adminService = $adminService;
     }
 
     public function login(Request $request)
@@ -123,4 +127,36 @@ class AuthController extends Controller
     }
 
     private function createMember($input) {}
+
+    /*------ Auth amin ------*/
+    public function loginAdmin()
+    {
+        return view('pages.auth.admin-login');
+    }
+
+    public function postLoginAdmin(Request $request)
+    {
+        $input = $request->only([
+            'email',
+            'password',
+        ]);
+
+        $admin = $this->adminService->findByField('email', $input['email']);
+        if (!$admin) {
+            return redirect()->back()->with('error', 'User not found!');
+        }
+
+        $checkLogin = $this->adminService->login($input);
+        if ($checkLogin == false) {
+            return redirect()->back()->with('error', 'Invalid email or password');
+        }
+
+        return redirect()->route('admin.dashboard');
+    }
+
+    public function logoutAdmin()
+    {
+        auth()->guard('admin')->logout();
+        return redirect()->route('admin.getLogin');
+    }
 }
