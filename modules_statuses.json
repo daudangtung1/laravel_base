@@ -4,5 +4,7 @@
     "Author": true,
     "Admin": true,
     "Seeder": true,
-    "AdminTableSeeder": true
+    "AdminTableSeeder": true,
+    "Faq": true,
+    "Core": true
 }

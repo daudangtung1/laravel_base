@@ -49,8 +49,11 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /*------------------- basic function-------------------*/
-    public function getAll(array $column = ['*'])
+    public function getAll(array $column = ['*'], $pagination = null)
     {
+        if ($pagination !== null) {
+            return $this->getQueryBuilder()->get($column)->paginate($pagination);
+        }
         return $this->getQueryBuilder()->get($column);
     }
 

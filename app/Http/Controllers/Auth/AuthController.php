@@ -10,7 +10,7 @@ use Modules\Author\Services\AuthorService;
 use Illuminate\Http\Request;
 use App\Utils\Constant;
 use Exception;
-use Modules\Author\Entities\Author;
+use Illuminate\Support\Facades\Hash;
 use Modules\Admin\Services\AdminService;
 
 class AuthController extends Controller
@@ -99,6 +99,15 @@ class AuthController extends Controller
         }
     }
 
+    public function getUser()
+    {
+        $user = auth('sanctum')->user();
+        if ($user) {
+            return $this->responseSuccess($user, 'Get user success');
+        }
+        return $this->responseFail('Get user fail');
+    }
+
     private function createUser($input)
     {
         $userInput = [
@@ -158,5 +167,27 @@ class AuthController extends Controller
     {
         auth()->guard('admin')->logout();
         return redirect()->route('admin.getLogin');
+    }
+
+    /*------ Auth author ------*/
+    public function getLoginAuthor()
+    {
+        return view('pages.auth.author-login');
+    }
+
+    public function postLoginAuthor(Request $request)
+    {
+        $input = $request->only([
+            'email',
+            'password',
+        ]);
+
+        $author = $this->authorService->findByEmail($input['email']);
+
+        if ($author && Hash::check($input['password'], $author->password)) {
+            return redirect()->route('author.dashboard');
+        } else {
+            dd(2);
+        }
     }
 }

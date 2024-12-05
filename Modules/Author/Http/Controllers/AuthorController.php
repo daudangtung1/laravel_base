@@ -10,34 +10,6 @@ use Modules\Author\Services\AuthorService;
 class AuthorController extends Controller
 {
     protected $module = 'author';
-    protected $authorService;
-
-    public function __construct(
-        AuthorService $authorService
-    ) {
-        $this->authorService = $authorService;
-    }
-
-    public function getLogin()
-    {
-        return view($this->module . '::login');
-    }
-
-    public function postLogin(Request $request)
-    {
-        $input = $request->only([
-            'email',
-            'password',
-        ]);
-
-        $author = $this->authorService->findByEmail($input['email']);
-
-        if ($author && Hash::check($input['password'], $author->password)) {
-            return redirect()->route('author.dashboard');
-        } else {
-            dd(2);
-        }
-    }
 
     public function dashboard()
     {

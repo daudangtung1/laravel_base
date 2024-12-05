@@ -13,4 +13,6 @@ class Constant
     const NO = 0;
 
     const DEFAULT_AUTHOR_TYPE_ID = 1;
+    
+    const DEFAULT_PAGINATE = 10;
 }
