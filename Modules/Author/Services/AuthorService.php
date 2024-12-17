@@ -14,6 +14,11 @@ class AuthorService
         $this->authorRepository = $authorRepository;
     }
 
+    public function getListByAdmin()
+    {
+        return $this->authorRepository->getListByAdmin();
+    }
+
     public function findByEmail($email)
     {
         return $this->authorRepository->findByField('email', $email);

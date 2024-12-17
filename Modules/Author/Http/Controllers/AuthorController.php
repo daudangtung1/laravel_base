@@ -4,21 +4,28 @@ namespace Modules\Author\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
 use Modules\Author\Services\AuthorService;
 
 class AuthorController extends Controller
 {
     protected $module = 'author';
+    protected $authorService;
 
-    public function dashboard()
+    public function __construct(
+        AuthorService $authorService
+    ) {
+        $this->authorService = $authorService;
+    }
+
+    public function index(Request $request)
     {
-        return view($this->module . '::dashboard');
+        $authors = $this->authorService->getListByAdmin();
+        return view($this->module . '::author.index', compact('authors'));
     }
 
     public function create()
     {
-        return view('author::create');
+        return view($this->module . '::author.create');
     }
 
     public function store(Request $request)
