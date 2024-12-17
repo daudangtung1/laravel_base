@@ -4,7 +4,6 @@ namespace Modules\Author\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Hash;
 use Modules\Author\Services\AuthorService;
 
 class AuthorController extends Controller
@@ -18,35 +17,15 @@ class AuthorController extends Controller
         $this->authorService = $authorService;
     }
 
-    public function getLogin()
+    public function index(Request $request)
     {
-        return view($this->module . '::login');
-    }
-
-    public function postLogin(Request $request)
-    {
-        $input = $request->only([
-            'email',
-            'password',
-        ]);
-
-        $author = $this->authorService->findByEmail($input['email']);
-
-        if ($author && Hash::check($input['password'], $author->password)) {
-            return redirect()->route('author.dashboard');
-        } else {
-            dd(2);
-        }
-    }
-
-    public function dashboard()
-    {
-        return view($this->module . '::dashboard');
+        $authors = $this->authorService->getListByAdmin();
+        return view($this->module . '::author.index', compact('authors'));
     }
 
     public function create()
     {
-        return view('author::create');
+        return view($this->module . '::author.create');
     }
 
     public function store(Request $request)

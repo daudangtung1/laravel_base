@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Modules\Author\Http\Controllers\AuthorController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,14 +14,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Route;
-use Modules\Author\Http\Controllers\AuthorController;
-
-Route::prefix('author')->as('author.')->group(function () {
-    Route::get('/', 'AuthorController@index');
-    Route::get('/login', [AuthorController::class, 'getLogin'])->name('getLogin');
-    Route::post('/login', [AuthorController::class, 'postLogin'])->name('postLogin');
-    Route::post('/logout', [AuthorController::class, 'logout'])->name('logout');
-
-    Route::get('/dashboard', [AuthorController::class, 'dashboard'])->name('dashboard');
+Route::group(['prefix' => 'admin/authors', 'middleware' => 'admin', 'as' => 'admin.author.'], function () {
+    Route::resource('/', AuthorController::class);
 });

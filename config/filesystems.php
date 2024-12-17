@@ -53,6 +53,10 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
+        'images' => [
+            'driver' => 'local',
+            'root' => 'C:\Users\MORTAR\OneDrive\Hình ảnh\5cm per s'
+        ],
     ],
 
     /*
