@@ -1,0 +1,66 @@
+.login__banner {
+
+    background: url("../images/sisu_bg-min.png");
+    height: 100vh;
+    position: relative;
+
+    .login__banner--wrapper {
+        display: flex;
+        justify-content: center;
+        height: 500px;
+        flex-wrap: nowrap;
+
+        .login__banner--wrapper--description {
+            background: url('../images/login-img.png');
+            width: 416px;
+            height: 100%;
+            background-size: cover;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            padding: 113px 56px 0 56px;
+            position: relative;
+
+            div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                h1 {
+                    font-weight: 400;
+                    letter-spacing: 0;
+                    font-size: 40px;
+                    line-height: 42px;
+                    color: #fff;
+                    width: 221px;
+                    margin: 0 0 24px;
+                    text-transform: uppercase;
+                }
+
+                p {
+                    color: #fff;
+                    font-weight: 400;
+                    font-size: 14px;
+                    letter-spacing: .3px;
+                    line-height: 22px;
+                    margin-right: 40px;
+                }
+            }
+        }
+
+        .login__banner--wrapper--form {
+
+            width: 440px;
+            height: 100%;
+            padding: 72px 48px 40px;
+            background: #fff;
+
+            form {
+                h2 {
+                    color: #000;
+                    margin: 0 0 43px;
+                }
+            }
+        }
+    }
+}

@@ -8,7 +8,7 @@
                     <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                    <span class="font-weight-bold mb-2">David Grey. H</span>
+                    <span class="font-weight-bold mb-2">{{ auth()->guard('admin')->user()->name }}</span>
                     <span class="text-secondary text-small">Project Manager</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
@@ -24,7 +24,7 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Author</span>
                 <i class="menu-arrow"></i>
-                <i class="mdi mdi-contacts menu-icon"></i>
+                <i class="mdi mdi-account menu-icon"></i>
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">

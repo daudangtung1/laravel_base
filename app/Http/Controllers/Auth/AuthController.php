@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Service\AuthService;
 use App\Service\UserService;
 use Modules\Author\Services\AuthorService;
@@ -12,6 +11,7 @@ use App\Utils\Constant;
 use Exception;
 use Illuminate\Support\Facades\Hash;
 use Modules\Admin\Services\AdminService;
+use App\Service\AdminActivityService;
 
 class AuthController extends Controller
 {
@@ -19,17 +19,20 @@ class AuthController extends Controller
     protected $userService;
     protected $authorService;
     protected $adminService;
+    protected $adminActivityService;
 
     public function __construct(
         AuthService $authService,
         UserService $userService,
         AuthorService $authorService,
-        AdminService $adminService
+        AdminService $adminService,
+        AdminActivityService $adminActivityService
     ) {
         $this->authService = $authService;
         $this->userService = $userService;
         $this->authorService = $authorService;
         $this->adminService = $adminService;
+        $this->adminActivityService = $adminActivityService;
     }
 
     public function login(Request $request)
@@ -160,11 +163,13 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Invalid email or password');
         }
 
+        $this->adminActivityService->loginActivity();
         return redirect()->route('admin.dashboard');
     }
 
     public function logoutAdmin()
     {
+        $this->adminActivityService->logoutActivity();
         auth()->guard('admin')->logout();
         return redirect()->route('admin.getLogin');
     }
