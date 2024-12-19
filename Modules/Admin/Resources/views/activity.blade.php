@@ -1,30 +1,27 @@
 @extends('core::layouts.master')
-
 @section('content')
-
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Author</h4>
-            <p class="card-description">Author list</code>
+            <h4 class="card-title">Acitvity</h4>
+            <p class="card-description">Activity log</code>
             </p>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Email</th>
-                        <th>Created at</th>
-                        <th>Username</th>
+                        <th>Log</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>IP address</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($authors as $k => $v )
+                    @forelse ($activities as $activity )
                     <tr>
-                        <!-- <td class="py-1">
-                            <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
-                        </td> -->
-                        <td>{{ $v->user->email}}</td>
-                        <td>{{ $v->user_name }}</td>
-                        <td>{{ $v->created_at }}</td>
+                        <td>{{ $activity->description}}</td>
+                        <td>{{ $activity->time }}</td>
+                        <td>{{ $activity->date }}</td>
+                        <td>{{ $activity->ip }}</td>
                     </tr>
                     @empty
                     <tr>

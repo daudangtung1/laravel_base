@@ -18,3 +18,4 @@ mix.copy(["resources/lib/toastr/toastr.css"], "public/lib/toastr/toastr.css").ve
 
 mix.copy(["resources/lib/bs4/css/bootstrap.css", "resources/lib/bs4/css/bootstrap-grid.css"], 'public/css/bootstrap.css');
 mix.sass("resources/css/app.scss", "public/css/app.css");
+mix.sass("resources/css/login.scss", "public/css/login.css");

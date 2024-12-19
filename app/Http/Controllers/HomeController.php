@@ -10,7 +10,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('pages.home');
+        if (auth()->guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect()->route('admin.getLogin');
     }
 
     public function sendNoti()

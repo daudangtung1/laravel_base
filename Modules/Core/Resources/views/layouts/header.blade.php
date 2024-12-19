@@ -120,17 +120,17 @@
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text">
-                        <p class="mb-1 text-black">David Greymaax</p>
+                        <p class="mb-1 text-black">{{ auth()->guard('admin')->user()->name }}</p>
                     </div>
                 </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('admin.activity') }}">
                         <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
                     <div class="dropdown-divider"></div>
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">
-                            <i class="mdi mdi-logout me-2 text-primary"></i> Signout
+                            <i class="mdi mdi-logout me-2 text-primary"></i> Sign out
                         </button>
                     </form>
                 </div>

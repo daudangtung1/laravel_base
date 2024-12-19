@@ -52,3 +52,17 @@ if (!function_exists('getImageUrl')) {
         return asset($path);
     }
 }
+
+if (!function_exists('formatToTime')) {
+    function formatToTime($input)
+    {
+        return Carbon::parse($input)->format('H:i:s');
+    }
+}
+
+if (!function_exists('formatToDate')) {
+    function formatToDate($input)
+    {
+        return Carbon::parse($input)->format('d-m-Y');
+    }
+}
