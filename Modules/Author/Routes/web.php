@@ -14,6 +14,6 @@ use Modules\Author\Http\Controllers\AuthorController;
 |
 */
 
-Route::group(['prefix' => 'admin/authors', 'middleware' => 'admin', 'as' => 'admin.author.'], function () {
-    Route::resource('/', AuthorController::class);
+Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
+    Route::resource('author', AuthorController::class);
 });
