@@ -1,10 +1,11 @@
 {
     "name": "nwidart/core",
     "description": "",
+    "minimum-stability": "dev",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Dau Dang Tung",
+            "email": "dangtung.dau.bka@gmail.com"
         }
     ],
     "extra": {

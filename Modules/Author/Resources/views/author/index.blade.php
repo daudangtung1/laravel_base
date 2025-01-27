@@ -22,7 +22,11 @@
                         <!-- <td class="py-1">
                             <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
                         </td> -->
-                        <td>{{ $v->user->email}}</td>
+                        <td>
+                            <a href="{{ route('admin.author.show', $v->id) }}">
+                                {{ $v->user->email}}
+                            </a>
+                        </td>
                         <td>{{ $v->user_name }}</td>
                         <td>{{ $v->created_at }}</td>
                     </tr>

@@ -25,7 +25,7 @@ class AuthorController extends Controller
 
     public function create()
     {
-        return view($this->module . '::author.create');
+        return view($this->module . '::author.detail');
     }
 
     public function store(Request $request)
@@ -35,7 +35,8 @@ class AuthorController extends Controller
 
     public function show($id)
     {
-        return view('author::show');
+        $author = $this->authorService->findById($id);
+        return view($this->module . '::author.detail', compact('author'));
     }
 
     public function edit($id)
