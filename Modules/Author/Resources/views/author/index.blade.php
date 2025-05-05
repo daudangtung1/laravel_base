@@ -27,8 +27,8 @@
                                 {{ $v->user->email}}
                             </a>
                         </td>
-                        <td>{{ $v->user_name }}</td>
                         <td>{{ $v->created_at }}</td>
+                        <td>{{ $v->user_name }}</td>
                     </tr>
                     @empty
                     <tr>
@@ -37,6 +37,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{ $authors->links('core::vendor.pagination.pagination') }}
         </div>
     </div>
 </div>

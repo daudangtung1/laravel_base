@@ -13,8 +13,8 @@ class AuthorRepository extends BaseRepository
         return Author::class;
     }
 
-    public function getListByAdmin()
+    public function getListByAdmin($paginate = Constant::DEFAULT_PAGINATE)
     {
-        return $this->model->with('user')->paginate(Constant::DEFAULT_PAGINATE);
+        return $this->model->with('user')->paginate($paginate);
     }
 }
