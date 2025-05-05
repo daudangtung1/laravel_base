@@ -1,66 +1,258 @@
-.login__banner {
+@import 'base.scss';
+/* Định nghĩa biến */
+$primary-color: #00ff99;
+$background-color: #1a1a1a;
+$box-bg-color: #ffffff;
+$text-color: #ffffff;
+$border-color: #ccc;
 
-    background: url("../images/sisu_bg-min.png");
+/* Mixin cho nút đăng nhập mạng xã hội */
+@mixin social-button($color) {
+    border: 1px solid $color;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+
+    img {
+        width: 18px;
+        margin-right: 10px;
+    }
+}
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Tổng quan */
+body {
+    background-color: $background-color;
+    color: $text-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
-    position: relative;
+    background: url('/images/sisu_bg-min.png') no-repeat center;
+}
 
-    .login__banner--wrapper {
+/* Layout chính */
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1100px;
+    background: #242424;
+    border-radius: 10px;
+    overflow: hidden;
+
+    /* Bên trái: Phần giới thiệu */
+    .left-section {
+        width: 50%;
+        padding: 40px;
+        background: url('/images/login-img.png') no-repeat center;
+        background-size: cover;
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        height: 500px;
-        flex-wrap: nowrap;
 
-        .login__banner--wrapper--description {
-            background: url('../images/login-img.png');
-            width: 416px;
-            height: 100%;
-            background-size: cover;
-            background-position: bottom;
-            background-repeat: no-repeat;
-            padding: 113px 56px 0 56px;
-            position: relative;
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
 
-            div {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
 
-                h1 {
-                    font-weight: 400;
-                    letter-spacing: 0;
-                    font-size: 40px;
-                    line-height: 42px;
-                    color: #fff;
-                    width: 221px;
-                    margin: 0 0 24px;
-                    text-transform: uppercase;
+        .credit {
+            margin-top: 20px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+    }
+
+    /* Bên phải: Form đăng nhập */
+    .right-section {
+        width: 50%;
+        background: $box-bg-color;
+        color: black;
+        padding: 40px;
+        position: relative;
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Form đăng nhập */
+        .login-box {
+            h2 {
+                margin-bottom: 20px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid $border-color;
+                border-radius: 5px;
+            }
+
+            /* Checkbox */
+            .remember-me {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 14px;
+                margin-bottom: 15px;
+
+                .remember-me__checkbox {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+
+                    input[type="checkbox"] {
+                        display: none;
+
+                        &:checked+.custom-checkbox {
+                            background-color: #00ff99;
+                            border-color: #00ff99;
+
+                            &::after {
+                                content: "✔";
+                                color: white;
+                                font-size: 14px;
+                                display: block;
+                                text-align: center;
+                                line-height: 18px;
+                            }
+                        }
+                    }
+
+                    .custom-checkbox {
+                        width: 20px;
+                        height: 20px;
+                        border: 2px solid #ccc;
+                        border-radius: 4px;
+                        display: inline-block;
+                        position: relative;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            border-color: #00ff99;
+                        }
+                    }
+
+                    span {
+                        margin-left: 10px;
+                        font-size: 14px;
+                        user-select: none;
+                        cursor: pointer;
+                    }
                 }
 
-                p {
-                    color: #fff;
-                    font-weight: 400;
-                    font-size: 14px;
-                    letter-spacing: .3px;
-                    line-height: 22px;
-                    margin-right: 40px;
+                a {
+                    color: #5d5d6c;
+                }
+            }
+
+            /* Nút đăng nhập */
+            .btn-login {
+                width: 100%;
+                padding: 10px;
+                background: $primary-color;
+                border: none;
+                color: black;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 5px;
+                margin-bottom: 15px;
+            }
+
+            /* Gạch ngang chia phần */
+            .divider {
+                text-align: center;
+                margin: 15px 0;
+                font-size: 14px;
+                opacity: 0.6;
+            }
+
+            /* Nút đăng nhập bằng mạng xã hội */
+            .btn-social {
+                &.google {
+                    @include social-button(#4285F4);
+                }
+
+                &.apple {
+                    @include social-button(black);
+                }
+
+                &.facebook {
+                    @include social-button(#1877F2);
+                }
+            }
+
+            /* Đăng ký */
+            .join-text {
+                text-align: center;
+                margin-top: 15px;
+                font-size: 14px;
+
+                a {
+                    color: #00cc66;
+                    font-weight: bold;
+                }
+            }
+
+            /* Điều khoản */
+            .terms {
+                font-size: 12px;
+                opacity: 0.7;
+                margin-top: 10px;
+
+                a {
+                    color: #00cc66;
                 }
             }
         }
+    }
+}
 
-        .login__banner--wrapper--form {
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
 
-            width: 440px;
-            height: 100%;
-            padding: 72px 48px 40px;
-            background: #fff;
+        .left-section {
+            width: 100%;
+            height: 200px;
+            text-align: center;
+        }
 
-            form {
-                h2 {
-                    color: #000;
-                    margin: 0 0 43px;
-                }
-            }
+        .right-section {
+            width: 100%;
         }
     }
 }

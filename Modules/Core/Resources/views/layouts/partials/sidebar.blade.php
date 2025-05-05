@@ -1,3 +1,8 @@
+@php
+    $sidebar = config('sidebar');
+    dd($sidebar);
+@endphp
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">

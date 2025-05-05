@@ -28,6 +28,7 @@
     </div>
 </body>
 @include('core::layouts.partials.script')
+@stack('scripts')
 <script>    
     $(document).ready(function(){
         let currentYear = new Date().getFullYear();

@@ -15,31 +15,44 @@
 </head>
 
 <body>
-    <div class="login__banner">
-        <div class="login__banner--wrapper">
-            <div class="login__banner--wrapper--description">
-                <div>
-                    <h1>Join the largest art community in the world</h1>
-                    <p>
-                        Explore and discover art, become a better artist, connect with others over mutual hobbies, or buy and sell work – you can do it all here.
-                    </p>
-                </div>
+    <div class="container">
+        <div class="left-section">
+            <div class="content">
+                <h1>JOIN THE LARGEST ART COMMUNITY IN THE WORLD</h1>
+                <p>Explore and discover art, become a better artist, connect with others over mutual hobbies, or buy and
+                    sell work – you can do it all here.</p>
+                <span class="credit">ART BY <strong>endprocess83</strong></span>
             </div>
-            <div class="login__banner--wrapper--form">
+        </div>
+
+        <div class="right-section">
+            <div class="login-box">
                 <form action="{{ route('admin.postLogin') }}" method="POST">
+                    <button class="close-btn">&times;</button>
+                    <h2>Log In</h2>
                     @csrf
-                    <h2>Login</h2>
-                    <div>
-                        <label for="email">Email</label><br>
-                        <input type="email" name="email" placeholder="Email">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter your username" name="email">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" name="password">
+                    <div class="remember-me">
+                        <label class="remember-me__checkbox">
+                            <input type="checkbox" id="remember">
+                            <div class="custom-checkbox"></div>
+                            <span for="remember">Keep me logged in</span>
+                        </label>
+
+                        <a href="#">Forgot username or password?</a>
                     </div>
-                    <div>
-                        <label for="password">Password</label><br>
-                        <input type="password" name="password" placeholder="Password">
-                    </div>
-                    <div>
-                        <button type="submit">Submit</button>
-                    </div>
+                    <button class="btn-login">Next</button>
+
+                    <p class="join-text">Become a Deviant <a href="#">Join DeviantArt</a></p>
+
+                    <p class="terms">
+                        By logging in to DeviantArt, I confirm that I have read and agree to the DeviantArt <a
+                            href="#">Terms of Service</a>,
+                        <a href="#">Privacy Policy</a>, and to receive emails and updates.
+                    </p>
                 </form>
             </div>
         </div>

@@ -19,6 +19,7 @@ class Author extends Model
         'author_type_id',
         'slug',
         'phone',
+        'avatar',
     ];
 
     public function changeIsActive(): void
