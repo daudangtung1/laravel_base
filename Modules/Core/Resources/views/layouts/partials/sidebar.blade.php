@@ -1,8 +1,3 @@
-@php
-    $sidebar = config('sidebar');
-    dd($sidebar);
-@endphp
-
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
         <li class="nav-item nav-profile">
@@ -24,6 +19,20 @@
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#posts-menu" aria-expanded="false" aria-controls="posts-menu">
+                <span class="menu-title">Bài viết</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-file-document menu-icon"></i>
+            </a>
+            <div class="collapse" id="posts-menu">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.posts.index') }}">Danh sách bài viết</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.posts.create') }}">Thêm bài viết</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.post-categories.index') }}">Danh mục</a></li>
+                </ul>
+            </div>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
