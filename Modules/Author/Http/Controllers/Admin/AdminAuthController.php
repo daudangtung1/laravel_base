@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers;
+namespace Modules\Author\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Admin\Http\Requests\AdminLoginRequest;
-use Modules\Admin\Services\AdminAuthService;
+use Modules\Author\Http\Requests\AdminLoginRequest;
+use Modules\Author\Services\AdminAuthService;
 
 class AdminAuthController extends Controller
 {
@@ -18,19 +18,19 @@ class AdminAuthController extends Controller
 
     /**
      * Show the admin login form.
-     * Redirects to the dashboard if already authenticated.
+     * Redirect to authors dashboard if already authenticated.
      */
     public function create()
     {
         if ($this->adminAuthService->isAuthenticated()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.authors.index');
         }
 
-        return view('admin::auth.login');
+        return view('author::admin.auth.login');
     }
 
     /**
-     * Handle the admin login form submission.
+     * Handle the login form submission.
      */
     public function store(AdminLoginRequest $request)
     {
@@ -45,18 +45,18 @@ class AdminAuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard'));
+        return redirect()->intended(route('admin.authors.index'));
     }
 
     /**
-     * Log out the authenticated admin.
+     * Log out the authenticated admin and redirect to the login page.
      */
     public function destroy(Request $request)
     {
         $this->adminAuthService->logout($request);
 
         return redirect()
-            ->route('admin.getLogin')
+            ->route('author.login')
             ->with('success', 'Bạn đã đăng xuất thành công.');
     }
 }

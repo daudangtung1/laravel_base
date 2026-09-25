@@ -1,21 +1,21 @@
 <?php
 
-namespace Modules\Admin\Providers;
+namespace Modules\Author\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class AdminServiceProvider extends ServiceProvider
+class AuthorServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Admin';
+    protected $moduleName = 'Author';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'admin';
+    protected $moduleNameLower = 'author';
 
     /**
      * Boot the application events.
@@ -41,14 +41,34 @@ class AdminServiceProvider extends ServiceProvider
 
         // Repositories
         $this->app->bind(
-            \Modules\Admin\Repositories\AdminAuthRepository::class,
-            \Modules\Admin\Repositories\AdminAuthRepository::class
+            \Modules\Author\Repositories\AdminAuthRepository::class,
+            \Modules\Author\Repositories\AdminAuthRepository::class
+        );
+        $this->app->bind(
+            \Modules\Author\Repositories\AuthorTypeRepository::class,
+            \Modules\Author\Repositories\AuthorTypeRepository::class
+        );
+        $this->app->bind(
+            \Modules\Author\Repositories\AuthorRepository::class,
+            \Modules\Author\Repositories\AuthorRepository::class
         );
 
         // Services
         $this->app->bind(
-            \Modules\Admin\Services\AdminAuthService::class,
-            \Modules\Admin\Services\AdminAuthService::class
+            \Modules\Author\Services\AdminAuthService::class,
+            \Modules\Author\Services\AdminAuthService::class
+        );
+        $this->app->bind(
+            \Modules\Author\Services\AuthorTypeService::class,
+            \Modules\Author\Services\AuthorTypeService::class
+        );
+        $this->app->bind(
+            \Modules\Author\Services\AuthorService::class,
+            \Modules\Author\Services\AuthorService::class
+        );
+        $this->app->bind(
+            \Modules\Author\Services\AuthorApiService::class,
+            \Modules\Author\Services\AuthorApiService::class
         );
     }
 

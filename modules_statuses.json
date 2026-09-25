@@ -7,5 +7,6 @@
     "AdminTableSeeder": true,
     "Faq": true,
     "Core": true,
-    "Post": true
+    "Post": true,
+    "User": true
 }

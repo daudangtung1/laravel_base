@@ -43,7 +43,11 @@ return [
         'admin' => [
             'driver' => 'session',
             'provider' => 'admin',
-        ]
+        ],
+        'author' => [
+            'driver'   => 'sanctum',
+            'provider' => 'authors',
+        ],
     ],
 
     /*
@@ -71,7 +75,12 @@ return [
 
         'admin' => [
             'driver' => 'eloquent',
-            'model' => Modules\Admin\Entities\Admin::class,
+            'model'  => Modules\Admin\Entities\Admin::class,
+        ],
+
+        'authors' => [
+            'driver' => 'eloquent',
+            'model'  => Modules\Author\Entities\Author::class,
         ],
     ],
 

@@ -35,18 +35,21 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Author</span>
+            <a class="nav-link" data-bs-toggle="collapse" href="#authors-menu" aria-expanded="false" aria-controls="authors-menu">
+                <span class="menu-title">Tác giả</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-account menu-icon"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="authors-menu">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.author.index') }}">List</a>
+                        <a class="nav-link" href="{{ route('admin.authors.index') }}">Danh sách tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.author.create') }}">Create</a>
+                        <a class="nav-link" href="{{ route('admin.authors.create') }}">Thêm tác giả</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.author-types.index') }}">Loại tác giả</a>
                     </li>
                 </ul>
             </div>
