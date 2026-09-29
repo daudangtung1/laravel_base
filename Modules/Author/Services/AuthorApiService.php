@@ -2,6 +2,7 @@
 
 namespace Modules\Author\Services;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Modules\Author\Entities\Author;
@@ -138,6 +139,47 @@ class AuthorApiService
         $this->forgetProfileCache($author->id);
 
         return $author->fresh('authorTypes');
+    }
+
+    /*---------------------------------------------------------------------------
+    | Public content (trang danh sách / chi tiết tác giả)
+    |---------------------------------------------------------------------------*/
+
+    /**
+     * Danh sách tác giả công khai kèm author types và số bài đã publish.
+     */
+    public function getPublicList(int $perPage = 12): LengthAwarePaginator
+    {
+        return $this->authorRepository->paginatePublic($perPage);
+    }
+
+    /**
+     * Hồ sơ tác giả công khai theo username, null nếu không tồn tại / bị ẩn.
+     */
+    public function getPublicProfile(string $username): ?Author
+    {
+        return $this->authorRepository->findPublicByUsername($username);
+    }
+
+    /**
+     * Bài viết đã publish của tác giả, phân trang server-side.
+     */
+    public function getPublicPosts(Author $author, int $perPage = 9): LengthAwarePaginator
+    {
+        // Cột phải đủ table qualifier vì query join bảng authorables.
+        return $author->posts()
+            ->published()
+            ->with('category:id,name,slug')
+            ->latest('posts.published_at')
+            ->paginate($perPage, [
+                'posts.id',
+                'posts.title',
+                'posts.slug',
+                'posts.excerpt',
+                'posts.featured_image',
+                'posts.category_id',
+                'posts.published_at',
+            ]);
     }
 }
 

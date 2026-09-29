@@ -35,6 +35,7 @@ class AuthorResource extends JsonResource
                     'color_hex' => $type->color_hex,
                 ]);
             }),
+            'posts_count'      => $this->whenCounted('posts'),
             'created_at'       => $this->created_at?->toISOString(),
             'updated_at'       => $this->updated_at?->toISOString(),
         ];

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Author\Http\Controllers\Api\AuthorApiController;
+use Modules\Author\Http\Controllers\Api\AuthorProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,15 @@ use Modules\Author\Http\Controllers\Api\AuthorApiController;
 |           GET    /api/author/me
 |           PATCH  /api/author/me
 |
+| Public content (trang tác giả ở frontend):
+|           GET    /api/authors
+|           GET    /api/authors/{author}   (author = username)
+|
 */
+
+// ── Public content ─────────────────────────────────────────────────────────
+Route::get('authors', [AuthorProfileController::class, 'index'])->name('api.authors.index');
+Route::get('authors/{author}', [AuthorProfileController::class, 'show'])->name('api.authors.show');
 
 // ── Public ────────────────────────────────────────────────────────────────
 Route::prefix('author')->as('api.author.')->group(function () {

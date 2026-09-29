@@ -2,10 +2,13 @@
 
 namespace Modules\Author\Entities;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Post\Entities\Post;
 
 class Author extends Authenticatable
 {
@@ -52,6 +55,28 @@ class Author extends Authenticatable
         return $this->hasMany(Authorable::class);
     }
 
+    /**
+     * Posts written by this author (qua bảng nối polymorphic authorables).
+     */
+    public function posts(): MorphToMany
+    {
+        return $this->morphedByMany(
+            Post::class,
+            'authorable',
+            'authorables',
+            'author_id',
+            'authorable_id'
+        )->withPivot(['is_primary', 'sort_order']);
+    }
+
+    /**
+     * Route model binding dùng username (duy nhất) thay vì id.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'username';
+    }
+
     /*---------------------------------------------------------------------------
     | Scopes
     |---------------------------------------------------------------------------*/
@@ -59,5 +84,16 @@ class Author extends Authenticatable
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    /**
+     * Tác giả hiển thị công khai: đang active và đã tới thời điểm publish.
+     */
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('is_active', true)
+            ->where(function (Builder $query) {
+                $query->whereNull('published_at')->orWhere('published_at', '<=', now());
+            });
     }
 }
